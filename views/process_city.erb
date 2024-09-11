@@ -2,6 +2,25 @@
 <html>
 <head>
   <title>Weather Tunes</title>
+  <style>
+  h2{
+        display: flex;
+        justify-content: center;
+      }
+  h3{
+        display: flex;
+        justify-content: center;
+      }
+
+  .playlist{
+        display: flex;
+        justify-content: space-around;
+      }
+  .playlist.h4{
+        display: flex;
+        justify-content: center;
+      }
+  </style>
 </head>
 
 <body>
@@ -18,7 +37,7 @@
   </div>
 
   <div>
-  <h2>Check Out These Playlists That Match <%=@user_input.capitalize%>'s <%=@summary.capitalize%> Vibes</h2>
+  <h2>Check Out These Playlists That Match <%=@user_location%>'s <%=@weather_summary%> Vibes</h2>
   </div>
   
   <div class="playlist">
