@@ -70,9 +70,22 @@ post("/process_city") do
    else
     @alert = "No alerts data."
   end
+  #-------------------------------------------------------------------------------------------------
+  #USING A SPOTIFY WEB API RUBY WRAPPER: https://github.com/guilhermesad/rspotify
+  
+  client_id="9de1d0fc09d64f659e16a47ac87b2ca2"
+  client_secret=ENV.fetch("SPOTIFY_TOKEN")
+  RSpotify.authenticate(client_id, client_secret)
+  @playlists = RSpotify::Playlist.search("#{@sumarry} weather", limit: 5)
+
+  
+    
+
+
+
+
+
+
 
    erb(:process_city)
 end
-
-#USING A SPOTIFY WEB API RUBY WRAPPER: https://github.com/guilhermesad/rspotify
-
