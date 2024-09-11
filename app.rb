@@ -2,6 +2,9 @@ require "sinatra"
 require "sinatra/reloader"
 require "http"
 require "rspotify"
+require "active_support/core_ext/string/inflections"
+
+
 
 get("/") do
   erb(:home)
@@ -9,6 +12,14 @@ end
 
 post("/process_city") do
   @user_input=params.fetch("city_input").downcase
+  @user_location=""
+  if @user_input.include?(" ")
+    camelize_location=@user_input.gsub(" ", "_").camelize
+    @location_formatted=camelize_location.titleize
+    @user_location=@location_formatted
+  else
+    @user_location=@user_input.capitalize
+  end
 
    #location information
    access_gmaps_key = ENV.fetch("GMAPS_KEY")
@@ -28,7 +39,15 @@ post("/process_city") do
 
    #summary information
    summary_hash = pirate_weather_data.fetch("hourly")
-   @summary=summary_hash.fetch("summary")
+   @summary=summary_hash.fetch("summary").downcase
+   @weather_summary=""
+   if @summary.include?(" ")
+    camelize_summary=@summary.gsub(" ", "_").camelize
+    @summary_formatted=camelize_summary.titleize
+    @weather_summary=@summary_formatted
+  else
+    @weather_summary=@summary.capitalize
+  end
 
   #precipitation
    hourly_hash = pirate_weather_data.fetch("hourly")
@@ -42,22 +61,13 @@ post("/process_city") do
     @precipitation= data_array_hash.fetch("precipType")
    end
 
-   #alerts
-   alert_data=pirate_weather_data.fetch("alerts")
-   alert_hash=alert_data[0]
-   @alert=""
-
    #handle alerts when there aren't any
-   if pirate_weather_data && pirate_weather_data.key?("alerts")
-    alert_data = pirate_weather_data.fetch("alerts")
-    if alert_data.any?
-      @alert = alert_hash.fetch("title", "No alert title available.")
-    else
-      @alert = "No alerts available."
-    end
-   else
-    @alert = "No alerts data."
-  end
+   alerts_data = pirate_weather_data.fetch("alerts", []])
+    @alert = if alerts_data.any?
+             alerts_data.first.fetch("title", "No alert title available.")
+           else
+             "No alerts available."
+           end
   #-------------------------------------------------------------------------------------------------
   #USING A SPOTIFY WEB API RUBY WRAPPER: https://github.com/guilhermesad/rspotify
   
@@ -65,22 +75,22 @@ post("/process_city") do
   client_secret=ENV.fetch("SPOTIFY_TOKEN")
   RSpotify.authenticate(client_id, client_secret)
 
-  if @precipitation != "none"
+  if @precip != "none"
     @playlists = RSpotify::Playlist.search("#{@precipitation}weather")
   else
-    if @summary.downcase== "clear"
-      @playlists = RSpotify::Playlist.search("upbeat")
+    if @summary== "clear"
+      @playlists = RSpotify::Playlist.search("energetic")
   
-    elsif @summary.downcase== "cloudy" 
+    elsif @summary== "cloudy" 
       @playlists = RSpotify::Playlist.search("indie")
   
-    elsif @summary.downcase== "partly cloudy" 
+    elsif @summary== "partly cloudy" 
       @playlists = RSpotify::Playlist.search("chill")
   
-    elsif @summary.downcase== "snow" 
+    elsif @summary== "snow" 
       @playlists = RSpotify::Playlist.search("cozy")
   
-    elsif @summary.downcase== "rain" 
+    elsif @summary== "rain" 
       @playlists = RSpotify::Playlist.search("lofi")
     
     else 

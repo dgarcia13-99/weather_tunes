@@ -218,6 +218,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  activesupport
   appdev_support
   better_errors
   binding_of_caller
@@ -236,7 +237,6 @@ DEPENDENCIES
   sinatra-contrib
   sqlite3 (~> 1.4)
   table_print
-  tzinfo
   webdrivers
   webmock
 
