@@ -24,7 +24,7 @@ post("/process_city") do
    pirate_weather_url = HTTP.get("https://api.pirateweather.net/forecast/#{pirate_weather_key}/#{@lat},#{@lng}")
    pirate_weather_data = JSON.parse(pirate_weather_url)
    weather_hash = pirate_weather_data.fetch("currently")
-   @current_temp = weather_hash.fetch("temperature")
+   @current_temp = weather_hash.fetch("temperature").to_i
 
    #summary information
    summary_hash = pirate_weather_data.fetch("hourly")
@@ -67,7 +67,7 @@ post("/process_city") do
     else
       @alert = "No alerts available."
     end
-  else
+   else
     @alert = "No alerts data."
   end
 
@@ -76,4 +76,3 @@ end
 
 #USING A SPOTIFY WEB API RUBY WRAPPER: https://github.com/guilhermesad/rspotify
 
-end
