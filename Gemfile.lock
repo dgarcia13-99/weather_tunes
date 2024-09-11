@@ -236,6 +236,7 @@ DEPENDENCIES
   sinatra-contrib
   sqlite3 (~> 1.4)
   table_print
+  tzinfo
   webdrivers
   webmock
 

@@ -6,7 +6,7 @@
 
 <body>
   <div>
-  <h1><%=@user_input.capitalize%>'s <%=@summary.capitalize%> <%=@time%> Vibes</h1>
+  <h1><%=@user_input.capitalize%>'s <%=@summary.capitalize%> Vibes</h1>
   </div>
 
   <div>
@@ -18,11 +18,11 @@
   </div>
 
   <div>
-  <h2>Check Out These Playlists That Match <%=@user_input.capitalize%>'s <%=@summary.capitalize%> <%=@time%> Vibes</h2>
+  <h2>Check Out These Playlists That Match <%=@user_input.capitalize%>'s <%=@summary.capitalize%> Vibes</h2>
   </div>
   
   <div class="playlist">
-  <%@playlists.each do |each_playlist|%>
+    <%@playlists.sample(3).each do |each_playlist|%>
     <div>
     <h4><%=each_playlist.name%></h4>
     <a href=<%=each_playlist.external_urls.fetch("spotify")%>><img src=<%=each_playlist.images[0].fetch("url")%> width="150" height="150"></a>

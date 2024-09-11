@@ -42,19 +42,6 @@ post("/process_city") do
     @precipitation= data_array_hash.fetch("precipType")
    end
 
-   #time of day
-   @time = ""
-   hour = Time.now.hour
-   if hour >= 5 && hour < 12
-    @time = "Morning"
-   elsif hour >= 12 && hour < 17
-    @time = "Afternoon"
-   elsif hour >= 17 && hour < 21
-    @time = "Evening"
-   else
-    @time = "Night"
-   end
-
    #alerts
    alert_data=pirate_weather_data.fetch("alerts")
    alert_hash=alert_data[0]
@@ -77,11 +64,20 @@ post("/process_city") do
   client_id="9de1d0fc09d64f659e16a47ac87b2ca2"
   client_secret=ENV.fetch("SPOTIFY_TOKEN")
   RSpotify.authenticate(client_id, client_secret)
+
   if @precipitation != "none"
-    @playlists = RSpotify::Playlist.search("#{@precipitation}weather", limit: 5)
+    @playlists = RSpotify::Playlist.search("#{@precipitation}weather")
   else
-    @playlists = RSpotify::Playlist.search("#{@sumarry}weather", limit: 5)
+    @playlists = RSpotify::Playlist.search("#{@sumarry} weather")
+  end
+
+  if @summary== "clear"
+    @extra_playlist = RSpotify::Playlist.search("upbeat weather")
+
+  if 
   end
 
    erb(:process_city)
+
+   
 end
