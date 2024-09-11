@@ -11,8 +11,8 @@
 
   <div>
     <dl>
-      <dt>Temperature: Current temperature is <%=@current_temp%> degrees Fahrenheit.</dt>
-      <dt>Precipation: <%=@precipation%></dt>
+      <dt>Temperature: Current temperature is <%=@current_temp%> degrees Fahrenheit</dt>
+      <dt>Precipitation: <%=@precipitation.capitalize%></dt>
       <dt>Alerts: <%=@alert%></dt>
     </dl>
   </div>
@@ -29,6 +29,18 @@
     </div>
   <%end%>
   </div>
+
+  <div>
+  <%if @precipitation != "none" %>
+    <h3>
+      Want More Playlist Options? Browse More Playlists <a href="https://open.spotify.com/search/<%=@precipitation%>%20weather/playlists" target="_blank">Here</a>
+    </h3>
+  <%else%>
+    <h3>
+      Want More Playlist Options? Browse More Playlists <a href="https://open.spotify.com/search/<%=@summary%>@20weather/playlists" target="_blank">Here</a>
+    </h3>
+  <%end%>
+</div>
 
 </body>
 </html>

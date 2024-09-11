@@ -30,15 +30,15 @@ post("/process_city") do
    summary_hash = pirate_weather_data.fetch("hourly")
    @summary=summary_hash.fetch("summary")
 
-  #precipation
+  #precipitation
    hourly_hash = pirate_weather_data.fetch("hourly")
    hourly_data_array = hourly_hash.fetch("data") 
    data_array_hash=hourly_data_array[0]
-   @precipation=""
+   @precipitation=""
    if data_array_hash.fetch("precipType") == "none"
-    @precipation= "No precipation at this time."
+    @precipitation= "No precipitation at this time."
    else
-    @precipation= data_array_hash.fetch("precipType")
+    @precipitation= data_array_hash.fetch("precipType")
    end
 
    #time of day
@@ -76,16 +76,11 @@ post("/process_city") do
   client_id="9de1d0fc09d64f659e16a47ac87b2ca2"
   client_secret=ENV.fetch("SPOTIFY_TOKEN")
   RSpotify.authenticate(client_id, client_secret)
-  @playlists = RSpotify::Playlist.search("#{@sumarry} weather", limit: 5)
-
-  
-    
-
-
-
-
-
-
+  if @precipitation != "none"
+    @playlists = RSpotify::Playlist.search("#{@precipitation}weather", limit: 5)
+  else
+    @playlists = RSpotify::Playlist.search("#{@sumarry} weather", limit: 5)
+  end
 
    erb(:process_city)
 end
