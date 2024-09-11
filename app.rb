@@ -68,16 +68,27 @@ post("/process_city") do
   if @precipitation != "none"
     @playlists = RSpotify::Playlist.search("#{@precipitation}weather")
   else
-    @playlists = RSpotify::Playlist.search("#{@sumarry} weather")
-  end
+    if @summary.downcase== "clear"
+      @playlists = RSpotify::Playlist.search("upbeat")
+  
+    elsif @summary.downcase== "cloudy" 
+      @playlists = RSpotify::Playlist.search("indie")
+  
+    elsif @summary.downcase== "partly cloudy" 
+      @playlists = RSpotify::Playlist.search("chill")
+  
+    elsif @summary.downcase== "snow" 
+      @playlists = RSpotify::Playlist.search("cozy")
+  
+    elsif @summary.downcase== "rain" 
+      @playlists = RSpotify::Playlist.search("lofi")
+    
+    else 
+      @playlists = RSpotify::Playlist.search("#{@sumarry} weather")
 
-  if @summary== "clear"
-    @extra_playlist = RSpotify::Playlist.search("upbeat weather")
-
-  if 
+    end
   end
 
    erb(:process_city)
-
-   
+  
 end
