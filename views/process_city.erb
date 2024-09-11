@@ -3,23 +3,57 @@
 <head>
   <title>Weather Tunes</title>
   <style>
+  h1{
+        font-family: "Poppins", sans-serif;
+        font-weight: 700;
+        font-style: normal;
+  }
   h2{
         display: flex;
         justify-content: center;
+        margin: 30px;
+        font-family: "Poppins", sans-serif;
+        font-weight: 700;
+        font-style: normal;
       }
   h3{
         display: flex;
         justify-content: center;
+        margin-top: 10px;
+        font-family: "Poppins", sans-serif;
+        font-weight: 700;
+        font-style: normal;
       }
 
-  .playlist{
-        display: flex;
-        justify-content: space-around;
-      }
-  .playlist.h4{
+    .browse{
         display: flex;
         justify-content: center;
+        text-decoration: none;
+        font-family: "Poppins", sans-serif;
+        font-weight: 700;
+        font-style: normal;
       }
+
+    .playlist{
+        display: flex;
+        justify-content: space-around;
+        text-align:center;
+        font-family: "Poppins", sans-serif;
+        font-weight: 700;
+        font-style: normal;
+      }
+    .title{
+        width: 150px;
+        font-family: "Poppins", sans-serif;
+        font-weight: 700;
+        font-style: normal;
+    }
+    dt{
+      font-family: "Poppins", sans-serif;
+        font-weight: 700;
+        font-style: normal;
+    }
+
   </style>
 </head>
 
@@ -28,7 +62,7 @@
   <h1><%=@user_location%>'s <%=@weather_summary%> Vibes</h1>
   </div>
 
-  <div>
+  <div class="summary">
     <dl>
       <dt>Temperature: Current temperature is <%=@current_temp%> degrees Fahrenheit</dt>
       <dt>Precipitation: <%=@precipitation.capitalize%></dt>
@@ -43,21 +77,19 @@
   <div class="playlist">
     <%@playlists.sample(3).each do |each_playlist|%>
     <div>
-    <h4><%=each_playlist.name%></h4>
     <a href=<%=each_playlist.external_urls.fetch("spotify")%>><img src=<%=each_playlist.images[0].fetch("url")%> width="150" height="150"></a>
+    <h4 class="title"><%=each_playlist.name%></h4>
     </div>
   <%end%>
   </div>
 
   <div>
   <%if @precip != "none" %>
-    <h3>
-      Want More Playlist Options? Browse More Playlists <a href="https://open.spotify.com/search/<%=@precip%>%20weather/playlists" target="_blank">Here</a>
-    </h3>
+    <h3>Want More Playlist Options?</h3>
+    <a class="browse" href="https://open.spotify.com/search/<%=@precip%>%20weather/playlists" target="_blank"><button>Browse More Playlists</button></a>
   <%else%>
-    <h3>
-      Want More Playlist Options? Browse More Playlists <a href="https://open.spotify.com/search/<%=@summary%>@20weather/playlists" target="_blank">Here</a>
-    </h3>
+    <h3>Want More Playlist Options?</h3> 
+    <a class="browse"href="https://open.spotify.com/search/<%=@summary%>@20weather/playlists" target="_blank"><button>Browse More Playlists</button></a> 
   <%end%>
 </div>
 
