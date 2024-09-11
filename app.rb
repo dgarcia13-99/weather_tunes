@@ -34,6 +34,7 @@ post("/process_city") do
    hourly_hash = pirate_weather_data.fetch("hourly")
    hourly_data_array = hourly_hash.fetch("data") 
    data_array_hash=hourly_data_array[0]
+   @precip=data_array_hash.fetch("precipType")
    @precipitation=""
    if data_array_hash.fetch("precipType") == "none"
     @precipitation= "No precipitation at this time."
@@ -79,7 +80,7 @@ post("/process_city") do
   if @precipitation != "none"
     @playlists = RSpotify::Playlist.search("#{@precipitation}weather", limit: 5)
   else
-    @playlists = RSpotify::Playlist.search("#{@sumarry} weather", limit: 5)
+    @playlists = RSpotify::Playlist.search("#{@sumarry}weather", limit: 5)
   end
 
    erb(:process_city)
