@@ -62,7 +62,7 @@ post("/process_city") do
    end
 
    #handle alerts when there aren't any
-   alerts_data = pirate_weather_data.fetch("alerts", []])
+   alerts_data = pirate_weather_data.fetch("alerts", [])
     @alert = if alerts_data.any?
              alerts_data.first.fetch("title", "No alert title available.")
            else
