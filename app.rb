@@ -1,11 +1,12 @@
 require "sinatra"
 require "sinatra/reloader"
+require "http"
 
 get("/") do
   erb(:home)
 end
 
-get("/process_city") do
+post("/process_city") do
   @user_input=params.fetch("city_input").downcase
 
    #location information
@@ -23,17 +24,51 @@ get("/process_city") do
    pirate_weather_data = JSON.parse(pirate_weather_url)
    weather_hash = pirate_weather_data.fetch("currently")
    @current_temp = weather_hash.fetch("temperature")
-  
 
    #summary information
    summary_hash = pirate_weather_data.fetch("hourly")
    @summary=summary_hash.fetch("summary")
 
   #precipation
-  hourly_hash = pirate_weather_data.fetch("hourly")
-  hourly_data_array = hourly_hash.fetch("data") 
-  data_array_hash=hourly_data_array[0]
-  @precipitation=data_array_hash.fetch("precipType")
+   hourly_hash = pirate_weather_data.fetch("hourly")
+   hourly_data_array = hourly_hash.fetch("data") 
+   data_array_hash=hourly_data_array[0]
+   @precipation=""
+   if data_array_hash.fetch("precipType") == "none"
+    @precipation= "No precipation at this time."
+   else
+    @precipation= data_array_hash.fetch("precipType")
+   end
+
+   #time of day
+   @time = ""
+   hour = Time.now.hour
+   if hour >= 5 && hour < 12
+    @time = "Morning"
+   elsif hour >= 12 && hour < 17
+    @time = "Afternoon"
+   elsif hour >= 17 && hour < 21
+    @time = "Evening"
+   else
+    @time = "Night"
+   end
+
+   #alerts
+   alert_data=pirate_weather_data.fetch("alerts")
+   alert_hash=alert_data[0]
+   @alert=""
+
+   #handle alerts when there aren't any
+   if pirate_weather_data && pirate_weather_data.key?("alerts")
+    alert_data = pirate_weather_data.fetch("alerts")
+    if alert_data.any?
+      @alert = alert_hash.fetch("title", "No alert title available.")
+    else
+      @alert = "No alerts available."
+    end
+  else
+    @alert = "No alerts data."
+  end
 
    erb(:process_city)
 end

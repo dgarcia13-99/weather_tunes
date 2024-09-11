@@ -6,9 +6,15 @@
 
 <body>
   <div>
-  <h1><%=@user_input.capitalize%>'s <%=@weather.capitalize%> Vibes</h1>
+  <h1><%=@user_input.capitalize%>'s <%=@summary.capitalize%> <%=@time%> Vibes</h1>
   </div>
 
-  
+  <div>
+    <dl>
+      <dt>Temperature: Current temperature is <%=@current_temp%> degrees Fahrenheit.</dt>
+      <dt>Precipation: <%=@precipation%></dt>
+      <dt>Alerts: <%=@alert%></dt>
+    </dl>
+  </div>
 </body>
 </html>
