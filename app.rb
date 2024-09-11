@@ -1,6 +1,7 @@
 require "sinatra"
 require "sinatra/reloader"
 require "http"
+require "rspotify"
 
 get("/") do
   erb(:home)
@@ -71,4 +72,8 @@ post("/process_city") do
   end
 
    erb(:process_city)
+end
+
+#USING A SPOTIFY WEB API RUBY WRAPPER: https://github.com/guilhermesad/rspotify
+
 end
