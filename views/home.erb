@@ -2,8 +2,8 @@
 <html>
 <head>
   <title>Weather Tunes</title>
-  
   <style>
+      /*Colors: #5e2f1a , #69351e , #944c2c  */
       h1{
         display: flex;
         justify-content: center;
@@ -11,14 +11,46 @@
         font-weight: 700;
         font-style: normal;
         margin: 50px;
+        font-size: 60px;
+        color: #5e2f1a;
       }
 
+      h2{
+        display: flex;
+        justify-content: center;
+        font-family: "Poppins", sans-serif;
+        font-weight: 700;
+        font-style: normal;
+        margin: 50px;
+        color: #69351e;
+      }
+
+      h3{
+        display: flex;
+        justify-content: center;
+        font-family: "Poppins", sans-serif;
+        font-weight: 700;
+        font-style: normal;
+        margin-top: 120px;
+        margin-bottom: 30px;
+        color: #69351e;
+      }
+
+      h4{
+        text-align: center;
+        font-family: "Poppins", sans-serif;
+        font-weight: 700;
+        font-style: normal;
+        color: #69351e;
+      }
+     
       p{
         display: flex;
         justify-content: center;
         font-family: "Poppins", sans-serif;
         font-weight: 700;
         font-style: normal;
+        color: #69351e;
       }
 
       form{
@@ -26,10 +58,38 @@
         justify-content: center;
       }
 
+      input{
+        background-color: #944c2c;
+        font-family: "Poppins", sans-serif;
+        font-weight: 700;
+        font-style: normal;
+      }
+
+      button{
+        background-color: #69351e;
+        font-family: "Poppins", sans-serif;
+        font-weight: 700;
+        font-style: normal;
+      }
+      body{
+        background-color: #944c2c;
+      }
+
+      .instructions{
+        margin-bottom: 400px;
+      }
+
+      html{
+        border-style: solid;
+        border-color: black;
+        border-width: 20px;
+      }
+
     </style>
 
 </head>
 <body>
+<body class="demo-3">
 <div>
 <h1>Weather Tunes</h1>
 </div>
@@ -40,11 +100,18 @@
 <div>
 <form action="/process_city" method="post">
 <label for="city"></label>
-<input id="city" name="city_input" text="text">
-
+<input size="50" id="city" name="city_input" text="text">
 <button>Find Music</button>
-
 </div>
+
+<h3>On The Playlist Page:</h3>
+
+<div class="instructions">
+  <p>Click on playlist images to view the recommended Spotify playlist on Spotify.com</p>
+  <p>Refresh the page to get different playlist recommendations</p>
+  <p>Click on the "Browse More Playlists" button to view even more playlists on Spotify.com</p>
+</div>
+
 
 </body>
 

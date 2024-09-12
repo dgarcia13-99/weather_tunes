@@ -3,10 +3,13 @@
 <head>
   <title>Weather Tunes</title>
   <style>
+  /*Colors: #5e2f1a , #69351e , #944c2c  */
   h1{
         font-family: "Poppins", sans-serif;
         font-weight: 700;
         font-style: normal;
+        color:#5e2f1a;
+        font-size: 40px;
   }
   h2{
         display: flex;
@@ -15,6 +18,7 @@
         font-family: "Poppins", sans-serif;
         font-weight: 700;
         font-style: normal;
+        color: #69351e;
       }
   h3{
         display: flex;
@@ -23,6 +27,7 @@
         font-family: "Poppins", sans-serif;
         font-weight: 700;
         font-style: normal;
+        color: #69351e;
       }
 
     .browse{
@@ -32,6 +37,7 @@
         font-family: "Poppins", sans-serif;
         font-weight: 700;
         font-style: normal;
+        color: #69351e;
       }
 
     .playlist{
@@ -41,19 +47,53 @@
         font-family: "Poppins", sans-serif;
         font-weight: 700;
         font-style: normal;
+        color: #69351e;
+        margin-bottom:30px;
       }
     .title{
         width: 150px;
         font-family: "Poppins", sans-serif;
         font-weight: 700;
         font-style: normal;
+        color: #69351e;
     }
     dt{
       font-family: "Poppins", sans-serif;
         font-weight: 700;
         font-style: normal;
+        color: #69351e;
+    }
+    body{
+      background-color: #944c2c;
     }
 
+    p{
+      color: #69351e;
+    }
+
+    button{
+        background-color: #69351e;
+        font-family: "Poppins", sans-serif;
+        font-weight: 700;
+        font-style: normal;
+      }
+
+      html{
+        border-style: solid;
+        border-color: black;
+        border-width: 20px;
+      }
+
+      .options{
+        margin-bottom: 400px;
+      }
+
+      img{
+        border-style: solid;
+        border-color: #5e2f1a;
+        border-width: 7px;
+        border-radius: 10px;
+      }
   </style>
 </head>
 
@@ -83,7 +123,7 @@
   <%end%>
   </div>
 
-  <div>
+  <div class="options">
   <%if @precip != "none" %>
     <h3>Want More Playlist Options?</h3>
     <a class="browse" href="https://open.spotify.com/search/<%=@precip%>weather/playlists" target="_blank"><button>Browse More Playlists</button></a>
