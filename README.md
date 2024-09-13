@@ -1,5 +1,7 @@
 Weather Tunes
 
+To run the app, type in 'bin/server' in the terminal (a bash shell). 
+
 "Weather Tunes" asks the user to input a city and returns three Spotify playlist suggestions that match the city's current weather condition. I utilized the GoogleMaps API to access the latitude and longitude components that were then used by the Pirate Weather API to access the location's hourly weather summary. I also utilized Spotify's Web API to search and query playlists that match the tone of the city's current weather conditions. 
 
 HOW TO USE:
